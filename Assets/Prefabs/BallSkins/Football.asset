@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21a0c0a045e99374a83eb12115b1647b, type: 3}
+  m_Name: Football
+  m_EditorClassIdentifier: 
+  skinPrefab: {fileID: 8886731685244190079, guid: d41b9aecc6bc21540b3507287ce30296, type: 3}
+  hitSounds:
+  - clip: {fileID: 8300000, guid: eaeed4e7d1973db469f53c2417be18f5, type: 3}
+    volume: 0.3
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: c952c5f845ae8754c8df2628df0eacc0, type: 3}
+    volume: 0.3
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: bea05f3f03c0ea84d92249014035674d, type: 3}
+    volume: 0.3
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  - clip: {fileID: 8300000, guid: 200b51a66829e9d41970f2e40fe08b26, type: 3}
+    volume: 0.3
+    pitch: 1
+    spatialBlend: 0
+    loop: 0
+  color: {r: 1, g: 1, b: 1, a: 1}
+  id: 1c0e7d72-1455-44a0-9843-11fedc1d5d8c

@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ImagesAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 5a1f5bd4f22843c46b29ae9ff47e2d28, type: 3}
+    totalSpriteSurfaceArea: 782515
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 189600406facfd244b852905e99c1162, type: 3}
+  - {fileID: 21300000, guid: fd8e0991f51a4ef4caeb52b77c57a2f3, type: 3}
+  - {fileID: 21300000, guid: ebf36212895ee584c99ed8439de58234, type: 3}
+  - {fileID: 21300000, guid: 9f91aef207de8af4db3eab40d8364b7c, type: 3}
+  - {fileID: 21300000, guid: a7a73a63ca71884428f5f9c468de4b4b, type: 3}
+  - {fileID: 21300000, guid: 39862d95def1cc142b73ba5a83d1ec60, type: 3}
+  - {fileID: 21300000, guid: 304fa0b8a4773e346a5204cddbf63312, type: 3}
+  - {fileID: 21300000, guid: 84e9afcb1da350349bdb3e2ae6b08dbc, type: 3}
+  - {fileID: 21300000, guid: f91433ebca22e8f429472f9750673935, type: 3}
+  - {fileID: 21300000, guid: 80bcf34c23ec01a4ab021c96f3c9772f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Basketball
+  - donut
+  - basket
+  - dot
+  - dog
+  - Restart
+  - star-vector-png-transparent-image-pngpix-21
+  - 8ball
+  - earth
+  - football
+  m_RenderDataMap: {}
+  m_Tag: ImagesAtlas
+  m_IsVariant: 0
