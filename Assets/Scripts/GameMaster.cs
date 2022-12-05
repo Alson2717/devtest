@@ -195,7 +195,7 @@ public class GameMaster : Singleton<GameMaster>
     }
     private void Update()
     {
-        if (gameEnded || this.IsPointerOverUIObject())
+        if (IgnoreUpdates())
             return;
 
         bool wasInput = false;
@@ -237,9 +237,6 @@ public class GameMaster : Singleton<GameMaster>
                 else
                     SetDotsAlpha(1.0f);
 
-                // run physics simulation to place dots
-                SimulateAndMarkTrajectory(lastVelocity, CalcAngularVelocity(lastVelocity));
-
                 // rotate basket in throw direction
                 Vector2 lookAtPos = (Vector2)CurrentBasket.transform.position + lastVelocity.normalized;
                 if (lookAtPos.Approximately2D(CurrentBasket.transform.position))
@@ -263,11 +260,11 @@ public class GameMaster : Singleton<GameMaster>
 
                 CurrentBasket.EndBonesDrag();
 
-                ball.transform.SetParent(null);
+                ball.RestoreGraphicsParent();
 
                 ball.RG.simulated = true;
                 ball.RG.velocity = lastVelocity;
-                ball.RG.angularVelocity = length * Mathf.Rad2Deg;
+                ball.RG.angularVelocity = CalcAngularVelocity(ball.RG.velocity);
 
                 SetFlying(true);
 
@@ -280,7 +277,26 @@ public class GameMaster : Singleton<GameMaster>
         }
         ball.RG.angularVelocity = CalcAngularVelocity(ball.RG.velocity);
     }
+    // do physics in FixedUpdate for more consistency
+    private void FixedUpdate()
+    {
+        if (IgnoreUpdates())
+            return;
 
+        if(ReadInput())
+        {
+            if(Input.GetMouseButton(0))
+            {
+                // run physics simulation to place dots
+                SimulateAndMarkTrajectory(lastVelocity, CalcAngularVelocity(lastVelocity));
+            }
+        }
+    }
+
+    private bool IgnoreUpdates()
+    {
+        return gameEnded || this.IsPointerOverUIObject();
+    }
     private bool ReadInput()
     {
         return CurrentBasket != null && !isFlying && ballIsReady && !UIMaster.Instance.IgnoreGameInput() && !switchingScene;
@@ -388,12 +404,10 @@ public class GameMaster : Singleton<GameMaster>
         ball.RG.velocity = new Vector2(0.0f, 0.0f);
         ball.RG.angularVelocity = 0.0f;
 
-        ball.transform.SetParent(CurrentBasket.MiddleBottomBone.transform);
-
         float minSpeed = 2.0f;
         float speed = ball.RG.velocity.magnitude;
         speed = Mathf.Max(speed, minSpeed);
-        StartCoroutine(MoveBallToRestPositionCoroutine(speed, CurrentBasket.BallRestPosition));
+        StartCoroutine(MoveBallToRestPositionCoroutine(speed, CurrentBasket.BallRestPosition, CurrentBasket.MiddleBottomBone.transform));
     }
 
     public void DisableBallBounciness()
@@ -585,13 +599,17 @@ public class GameMaster : Singleton<GameMaster>
         simulationBall.velocity = velocity;
         simulationBall.angularVelocity = angularVelocity;
 
+        Debug.DrawLine(simulationBall.transform.position, ball.transform.position, Color.red);
+
         Vector3 scale = new Vector3(1.0f, 1.0f, 1.0f);
 
         int dotCounter = 0;
         int dotsListCounter = 0;
-        for(int i = 0; i < steps; i++)
+        for (int i = 0; i < steps; i++)
         {
             simulationPhysicsScene.Simulate(Time.fixedDeltaTime);
+
+            simulationBall.angularVelocity = CalcAngularVelocity(simulationBall.velocity);
 
             dotCounter++;
             if (dotCounter == dotEverySteps)
@@ -615,7 +633,7 @@ public class GameMaster : Singleton<GameMaster>
     }
 
     #region Coroutines
-    private IEnumerator MoveBallToRestPositionCoroutine(float speed, Transform restPosition)
+    private IEnumerator MoveBallToRestPositionCoroutine(float speed, Transform restPosition, Transform toParent)
     {
         ballIsReady = false;
 
@@ -635,6 +653,8 @@ public class GameMaster : Singleton<GameMaster>
             yield return null;
         }
         ball.transform.position = restPosition.position;
+
+        ball.SetGraphicsParent(toParent);
 
         CurrentBasket.StartBounce(1.0f, touchedBasketSound);
         yield return CurrentBasket.bounceCoroutine.coroutine;

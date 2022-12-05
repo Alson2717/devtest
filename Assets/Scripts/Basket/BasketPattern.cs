@@ -79,6 +79,8 @@ public class BasketPattern : MonoBehaviour
         float min = float.MaxValue;
         foreach (Collider2D collider in allColliders)
         {
+            if (collider == null)
+                continue;
             float offset = collider.bounds.min.x - transform.position.x;
             min = Mathf.Min(min, offset);
         }
@@ -89,6 +91,8 @@ public class BasketPattern : MonoBehaviour
         float max = float.MinValue;
         foreach (Collider2D collider in allColliders)
         {
+            if (collider == null)
+                continue;
             float offset = collider.bounds.max.x - transform.position.x;
             max = Mathf.Max(max, offset);
         }

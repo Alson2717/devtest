@@ -97,6 +97,16 @@ public class Ball : MonoBehaviour
         SetLastSkinID(skin.ID);
     }
 
+    public void SetGraphicsParent(Transform parent)
+    {
+        CurrentSkin.transform.SetParent(parent);
+    }
+    public void RestoreGraphicsParent()
+    {
+        CurrentSkin.transform.SetParent(graphicsParent);
+        CurrentSkin.transform.localPosition = Vector3.zero;
+    }
+
     public static void SetLastSkinID(string id)
     {
         PlayerPrefs.SetString(KEY_LAST_SKIN_ID, id);
